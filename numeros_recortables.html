@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Recortables 1 al 10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        /* CSS específico para impresión en tamaño A4 */
+        @page { 
+            size: A4; 
+            margin: 15mm; 
+        }
+        
+        body {
+            font-family: 'Fredoka One', cursive;
+            background-color: white;
+            padding: 0; 
+            margin: 0;
+            /* Forza a las impresoras a respetar los fondos de color */
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        
+        /* Oculta los controles al imprimir */
+        .no-print {
+            text-align: center;
+            padding: 20px;
+            background: #f0f8ff;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-family: sans-serif;
+        }
+
+        @media print {
+            .no-print { display: none; }
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        /* Tarjetas diseñadas con líneas de corte marcadas */
+        .cutout-card {
+            width: 47%; /* Espacio para 2 tarjetas por fila */
+            height: 125mm; /* Tarjetas grandes, fáciles de sujetar para niños */
+            border: 5px dashed #444; /* Borde punteado para indicar dónde recortar */
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+            page-break-inside: avoid; /* Evita que la tarjeta se parta en 2 hojas */
+            margin-bottom: 15mm;
+        }
+
+        .scissors-icon {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 30px;
+            background: white;
+            padding: 2px;
+            border-radius: 50%;
+        }
+
+        .number-text {
+            font-size: 260px; /* Tamaño aún más grande y llamativo */
+            color: white;
+            text-shadow: 8px 8px 0px rgba(0,0,0,0.15);
+            line-height: 0.9;
+        }
+
+        .word-text {
+            font-size: 55px;
+            color: white;
+            margin-top: 0px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print">
+        <h1>✂️ Números Recortables del 1 al 10</h1>
+        <p>Este archivo está especialmente diseñado para imprimirse en tamaño A4.</p>
+        <p>⚠️ <strong>Instrucción importante:</strong> Asegúrate de activar la opción de <strong>"Imprimir colores de fondo"</strong> (o Background graphics) en la configuración de la impresora.</p>
+        <button onclick="window.print()" style="padding:15px 30px; font-size:20px; cursor:pointer; background:#FF595E; color:white; border:none; border-radius:10px; font-weight:bold; font-family:'Fredoka One', cursive;">🖨️ Imprimir Ahora</button>
+    </div>
+
+    <div class="container" id="cards-container">
+        <!-- Las tarjetas se generan dinámicamente -->
+    </div>
+
+    <script>
+        const data = [
+            { num: 1, name: 'uno', color: '#FF595E' },
+            { num: 2, name: 'dos', color: '#FF924C' },
+            { num: 3, name: 'tres', color: '#FFCA3A' },
+            { num: 4, name: 'cuatro', color: '#8AC926' },
+            { num: 5, name: 'cinco', color: '#52A675' },
+            { num: 6, name: 'seis', color: '#1982C4' },
+            { num: 7, name: 'siete', color: '#4267AC' },
+            { num: 8, name: 'ocho', color: '#6A4C93' },
+            { num: 9, name: 'nueve', color: '#B56576' },
+            { num: 10, name: 'diez', color: '#F15BB5' }
+        ];
+
+        const container = document.getElementById('cards-container');
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'cutout-card';
+            card.style.backgroundColor = item.color;
+            
+            card.innerHTML = `
+                <div class="scissors-icon">✂️</div>
+                <div class="number-text">${item.num}</div>
+                <div class="word-text">${item.name}</div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
